@@ -6,7 +6,12 @@ function read_csv($csv_file){
     $a = 0;
     while (!feof($file) ) {
     	$result = fgetcsv($file);
-    	$line_of_text[] = $result;
+
+    	//removing empty csv input
+    	if(array(null) !== $result && "" != $result)
+    	{
+        	$line_of_text[] = $result;
+    	}
     }
     fclose($file);
     return $line_of_text;
