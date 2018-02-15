@@ -13,6 +13,7 @@ function read_csv($csv_file){
     		//modify the input to have capital letter at the front and lowercase for the rest
     		$result[0] = ucfirst(strtolower($result[0]));
     		$result[1] = ucfirst(strtolower($result[1])); 
+    		$result[2] = strtolower($result[2]); //all lowercase for email
 
         	$line_of_text[] = $result;
     	}
