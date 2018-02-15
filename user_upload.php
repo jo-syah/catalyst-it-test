@@ -56,14 +56,15 @@ function email_rule($input){
 
 //create table users
 function create_table_users(){
-	$query = "CREATE TABLE Users (
+	$query = "DROP TABLE IF EXISTS Users;";
+	$query .= "CREATE TABLE Users (
 	    Name varchar(255) NOT NULL,
 	    Surname varchar(255) NOT NULL,
 		Email varchar(255) NOT NULL,
 	    PRIMARY KEY (Email)
 	);";
 
-	if(connect_db()->query($query)) {
+	if(connect_db()->multi_query($query)) {
 		print_r("Success creating table: Users");
 	} else {
 		print_r("Error creating table: " . connect_db()->error);
