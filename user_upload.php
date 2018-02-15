@@ -2,7 +2,7 @@
 
 class Main {
 	//mysql connection detail
-	private $servername = "localhost";
+	private $host = "localhost";
 	private $username = "root";
 	private $password = "Johan123";
 	private $database = "catalyst_it";
@@ -39,7 +39,7 @@ class Main {
 	//db connection
 	function connect_db(){
 		// Create connection
-		$conn = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
+		$conn = mysqli_connect($this->host, $this->username, $this->password, $this->database);
 		return $conn;
 	}
 
@@ -67,25 +67,24 @@ class Main {
 		if($this->connect_db()->multi_query($query)) {
 			print_r("Success creating table: Users");
 		} else {
-			print_r("Error creating table: " . connect_db()->error);
+			print_r("Error creating table: " . $this->connect_db()->error);
 		}
 	}
-	/*
-	//test db connect
-	if(connect_db()->connect_error){
-		die("Connection failed: " . $conn->connect_error);
+
+	public function get_mysql_host(){
+		return $this->host;
 	}
-	else
-	{
-		//test create table users
-		//create_table_users();
-		//test csv array result
-		//$csv_input = read_csv("users.csv");
-		//print_r($csv_input);
+
+	public function get_mysql_username(){
+		return $this->username;
 	}
-	*/
+
+	public function get_mysql_password(){
+		return $this->password;
+	}
 }
 
 $run = new Main();
-$run->create_table_users();
+//$run->create_table_users();
+echo $run->get_mysql_password();
 ?>
