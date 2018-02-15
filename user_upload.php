@@ -1,6 +1,7 @@
 <?php 
 
 class Main {
+	//mysql connection detail
 	private $servername = "localhost";
 	private $username = "root";
 	private $password = "Johan123";
@@ -37,10 +38,8 @@ class Main {
 
 	//db connection
 	function connect_db(){
-
 		// Create connection
 		$conn = mysqli_connect($this->servername, $this->username, $this->password, $this->database);
-
 		return $conn;
 	}
 
@@ -55,7 +54,6 @@ class Main {
 		return str_replace(' ', '', strtolower($input));
 	}
 
-
 	//create table users
 	function create_table_users(){
 		$query = "DROP TABLE IF EXISTS Users;";
@@ -63,10 +61,10 @@ class Main {
 		    Name varchar(255) NOT NULL,
 		    Surname varchar(255) NOT NULL,
 			Email varchar(255) NOT NULL,
-		    PRIMARY KEY (Email)
+		    UNIQUE (Email)
 		);";
 
-		if(connect_db()->multi_query($query)) {
+		if($this->connect_db()->multi_query($query)) {
 			print_r("Success creating table: Users");
 		} else {
 			print_r("Error creating table: " . connect_db()->error);
@@ -89,5 +87,5 @@ class Main {
 }
 
 $run = new Main();
-$run->connect_db();
+$run->create_table_users();
 ?>
