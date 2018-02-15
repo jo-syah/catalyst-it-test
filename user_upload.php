@@ -29,6 +29,19 @@ function read_csv($csv_file){
     return $line_of_text;
 }
 
+//db connection
+function connect_db(){
+	$servername = "localhost";
+	$username = "root";
+	$password = "Johan123";
+	$database = "catalyst_it";
+
+	// Create connection
+	$conn = mysqli_connect($servername, $username, $password, $database);
+
+	return $conn;
+}
+
 //modified the input to have capital letter at the front and lowercase for the rest
 //removed any unwanted character from names, only a-z and A-Z.
 function name_rule($input){
@@ -40,7 +53,14 @@ function email_rule($input){
 	return str_replace(' ', '', strtolower($input));
 }
 
-//test array result
-$csv_input = read_csv("users.csv");
-print_r($csv_input);
+//test db connect
+if(connect_db()->connect_error){
+	die("Connection failed: " . $conn->connect_error);
+}
+else
+{
+	//test csv array result
+	$csv_input = read_csv("users.csv");
+	print_r($csv_input);
+}
 ?>
