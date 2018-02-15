@@ -10,11 +10,10 @@ function read_csv($csv_file){
     	//removing empty csv input
     	if(array(null) !== $result && "" != $result)
     	{
-    		//modify the input to have capital letter at the front and lowercase for the rest
-    		//removing any unwanted character from names, only a-z and A-Z.
-    		$result[0] = preg_replace("/[^a-zA-Z]+/", "", ucfirst(strtolower($result[0])));
-    		$result[1] = preg_replace("/[^a-zA-Z]+/", "", ucfirst(strtolower($result[1]))); 
-			$result[2] = str_replace(' ', '', strtolower($result[2])); //all lowercase for email & remove any whitespace
+    		
+    		$result[0] = name_rule($result[0]);
+    		$result[1] = name_rule($result[1]);
+			$result[2] = email_rule($result[2]);
 			
 			//filter invalid email address
 			if (!filter_var($result[2], FILTER_VALIDATE_EMAIL)) {
@@ -28,6 +27,17 @@ function read_csv($csv_file){
     }
     fclose($file);
     return $line_of_text;
+}
+
+//modified the input to have capital letter at the front and lowercase for the rest
+//removed any unwanted character from names, only a-z and A-Z.
+function name_rule($input){
+	return preg_replace("/[^a-zA-Z]+/", "", ucfirst(strtolower($input)));
+}
+
+//all string lowercased & remove any whitespace
+function email_rule($input){
+	return str_replace(' ', '', strtolower($input));
 }
 
 //test array result
