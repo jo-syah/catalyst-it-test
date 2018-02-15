@@ -53,14 +53,35 @@ function email_rule($input){
 	return str_replace(' ', '', strtolower($input));
 }
 
+
+//create table users
+function create_table_users(){
+	$query = "CREATE TABLE Users (
+	    Name varchar(255) NOT NULL,
+	    Surname varchar(255) NOT NULL,
+		Email varchar(255) NOT NULL,
+	    PRIMARY KEY (Email)
+	);";
+
+	if(connect_db()->query($query)) {
+		print_r("Success creating table: Users");
+	} else {
+		print_r("Error creating table: " . connect_db()->error);
+	}
+}
+
 //test db connect
 if(connect_db()->connect_error){
 	die("Connection failed: " . $conn->connect_error);
 }
 else
 {
+	//test create table users
+	create_table_users();
 	//test csv array result
-	$csv_input = read_csv("users.csv");
-	print_r($csv_input);
+	//$csv_input = read_csv("users.csv");
+	//print_r($csv_input);
 }
+
+
 ?>
