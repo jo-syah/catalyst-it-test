@@ -18,12 +18,12 @@ class Main {
 	    	if(array(null) !== $result && "" != $result)
 	    	{
 	    		
-	    		$result[0] = name_rule($result[0]);
-	    		$result[1] = name_rule($result[1]);
-				$result[2] = email_rule($result[2]);
+	    		$result[0] = $this->name_rule($result[0]);
+	    		$result[1] = $this->name_rule($result[1]);
+				$result[2] = $this->email_rule($result[2]);
 				
 				//filter invalid email address
-				if (!filter_var($result[2], FILTER_VALIDATE_EMAIL)) {
+				if(!filter_var($result[2], FILTER_VALIDATE_EMAIL)) {
 	  				print_r("Wrong email format: " . $result[2] . "\n");
 				}
 				else
@@ -86,5 +86,6 @@ class Main {
 
 $run = new Main();
 //$run->create_table_users();
-echo $run->get_mysql_password();
+$csv = $run->read_csv("users.csv");
+//print_r($csv);
 ?>
