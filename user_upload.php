@@ -2,6 +2,7 @@
 
 class Main {
 	//mysql connection detail
+	//change the detail accordingly
 	private $host = "localhost";
 	private $username = "root";
 	private $password = "Johan123";
